@@ -9,12 +9,32 @@
                     <sheet>
                         <group>
                             <field name="name"/>
-                            <field name="decsription"/>
                         </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="decsription"/>
+                            </page>
+                            <page string="About">
+                                This is an example of notebooks
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="course_search_view">
+            <field name="name">course.search</field>
+            <field name="model">openacademy.course</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="decsription"/>
+                </search>
+            </field>
+        </record>
+
+
         <record model="ir.actions.act_window" id="course_list_action">
             <field name="name">Courses</field>
             <field name="res_model">openacademy.course</field>
