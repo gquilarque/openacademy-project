@@ -13,3 +13,4 @@ class Course(models.Model):
 
     name = fields.Char(string='Title', required=True)# Field reserved to identified the rec name
     decsription = fields.Text(string='Description') 
+    user_id = fields.Many2one('res.users', ondelete='cascade', string='User Responsible')

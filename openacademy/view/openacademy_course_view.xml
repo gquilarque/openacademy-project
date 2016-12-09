@@ -9,6 +9,7 @@
                     <sheet>
                         <group>
                             <field name="name"/>
+                            <field name="user_id"/>
                         </group>
                         <notebook>
                             <page string="Description">
@@ -29,7 +30,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
-                    <field name="decsription"/>
+                    <field name="user_id"/>
                 </tree>
             </field>
         </record>
