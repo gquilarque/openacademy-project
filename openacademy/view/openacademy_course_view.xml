@@ -25,7 +25,9 @@
                                         <field name="user_id"/>
                                     </tree>
                                 </field>
-                            </page>
+		               <label for="attendee_ids"/>
+                               <field name="attendee_ids"/>
+                             </page>
                         </notebook>
                     </sheet>
                 </form>

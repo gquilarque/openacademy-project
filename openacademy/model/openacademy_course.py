@@ -15,3 +15,4 @@ class Course(models.Model):
     decsription = fields.Text(string='Description') 
     user_id = fields.Many2one('res.users', ondelete='cascade', string='User Responsible')
     session_ids = fields.One2many('openacademy.session', 'course_id', string="Sessions G")
+    attendee_ids = fields.Many2many('res.partner', string="Attendees")
