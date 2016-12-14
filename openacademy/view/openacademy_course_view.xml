@@ -20,7 +20,7 @@
                             </page>
                             <page string="Sessions">
                                 <field name="session_ids">
-                                    <tree string="Registered sessions">
+                                    <tree string="Registered sessions" editable="True">
                                         <field name="name"/>
                                         <field name="user_id"/>
                                     </tree>
