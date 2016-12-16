@@ -22,10 +22,27 @@
                                 <field name="start_date"/>
                                 <field name="duration"/>
                                 <field name="seats"/>
+                                <field name="taken_seats" widget="progressbar"/>
                             </group>
+                        </group>
+                        <group>
+                            <field name="attendee_ids"/>
                         </group>
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="session_tree_view">
+            <field name="name">session.tree</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <tree string="Session Tree">
+                    <field name="name"/>
+                    <field name="course_id"/>
+                    <field name="taken_seats" widget="progressbar"/>
+                </tree>
             </field>
         </record>
 
