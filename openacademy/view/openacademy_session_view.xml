@@ -21,6 +21,7 @@
                             </group>
                             <group string="Schedule">
                                 <field name="start_date"/>
+                                <field name="end_date"/>
                                 <field name="duration"/>
                                 <field name="seats"/>
                                 <field name="taken_seats" widget="progressbar"/>
@@ -34,6 +35,19 @@
             </field>
         </record>
 
+
+        <!-- calendar view -->
+        <record model="ir.ui.view" id="session_calendar_view">
+            <field name="name">session.calendar</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <calendar string="Session Calendar" date_start="start_date"
+                          date_stop="end_date"
+                          color="user_id">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
 
         <record model="ir.ui.view" id="session_tree_view">
             <field name="name">session.tree</field>
@@ -52,7 +66,7 @@
             <field name="name">Sessions</field>
             <field name="res_model">openacademy.session</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,calendar</field>
         </record>
 
         <menuitem id="session_menu" name="Sessions"

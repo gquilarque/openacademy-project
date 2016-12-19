@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+from datetime import timedelta
 from openerp import api,fields, models
 
 '''
