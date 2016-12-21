@@ -23,6 +23,23 @@ class Session(models.Model):
     attendees_count = fields.Integer(
         string="Attendees count", compute='_get_attendees_count', store=True)
     color = fields.Integer()
+    state = fields.Selection([
+        ('draft', "Draft"),
+        ('confirmed', "Confirmed"),
+        ('done', "Done"),
+    ], default='draft')
+
+    @api.multi
+    def action_draft(self):
+        self.state = 'draft'
+
+    @api.multi
+    def action_confirm(self):
+        self.state = 'confirmed'
+
+    @api.multi
+    def action_done(self):
+        self.state = 'done'
 
     @api.depends('attendee_ids')
     def _get_attendees_count(self):
