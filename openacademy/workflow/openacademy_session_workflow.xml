@@ -48,6 +48,12 @@
             <field name="act_to" ref="activity_done"/>
             <field name="signal">button_done</field>
         </record>
+        <!--Transition Automatic-->
+        <record model="workflow.transition" id="session_auto_confirm_half_filled">
+            <field name="act_from" ref="activity_draft"/>
+            <field name="act_to" ref="activity_confirmed"/>
+            <field name="condition">taken_seats &gt; 50</field>
+        </record>
     </data>
 </openerp>
 
