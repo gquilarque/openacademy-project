@@ -3,7 +3,7 @@
     <data noupdate="0">
         <record model="openacademy.course" id="course3">
             <field name="name">Course 3</field>
-            <field name="decsription">Course 3's description
+            <field name="description">Course 3's description
 
 Can have multiple lines
             </field>
@@ -14,7 +14,7 @@ Can have multiple lines
         </record>
         <record model="openacademy.course" id="course5">
             <field name="name">Course 5</field>
-            <field name="decsription">Course 5's description</field>
+            <field name="description">Course 5's description</field>
         </record>
     </data>
 </openerp>

@@ -15,7 +15,7 @@ class Course(models.Model):
     _name = "openacademy.course" # Model odoo name
 
     name = fields.Char(string='Title', required=True)# Field reserved to identified the rec name
-    decsription = fields.Text(string='Description') 
+    description = fields.Text(string='Description') 
     user_id = fields.Many2one('res.users', ondelete='cascade', string='User Responsible')
     session_ids = fields.One2many('openacademy.session', 'course_id', string="Sessions G")
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
@@ -36,8 +36,8 @@ class Course(models.Model):
 
 
     _sql_constraints = [
-        ('name_decsription_check',
-         'CHECK(name != decsription)',
+        ('name_description_check',
+         'CHECK(name != description)',
          "The title of the course should not be the description"),
 
         ('name_unique',

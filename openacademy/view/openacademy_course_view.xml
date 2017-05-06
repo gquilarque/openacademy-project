@@ -13,7 +13,7 @@
                         </group>
                         <notebook>
                             <page string="Description">
-                                <field name="decsription"/>
+                                <field name="description"/>
                             </page>
                             <page string="About">
                                 This is an example of notebooks
@@ -52,7 +52,7 @@
             <field name="arch" type="xml">
                 <search>
                     <field name="name"/>
-                    <field name="decsription"/>
+                    <field name="description"/>
                     <filter name="my_courses" string="My Courses"
                             domain="[('user_id', '=', uid)]"/>
                     <group string="Group By">
