@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+############################################################################
+#    Module Writen For Odoo, Open Source Management Solution
+#
+#    coded by: Gabriela Quilarque <gabrielaquilarque97@gmail.com>
+############################################################################
+
 from datetime import timedelta
 from openerp import api,exceptions,fields,models
 
@@ -9,19 +15,22 @@ class Session(models.Model):
     start_date = fields.Date(default=fields.Date.today)
     duration = fields.Float(digits=(6, 2), help="Duration in days")
     seats = fields.Integer(string="Number of seats")
-    user_id = fields.Many2one('res.partner', string='Instructor',
-                                             domain=['|',('instructor_id', '=', True),
-                                                         ('category_id.name', 'ilike', "Teacher")])
-    course_id = fields.Many2one('openacademy.course', string='Course', required=True) 
+    user_id = fields.Many2one('res.partner',
+        string='Instructor',
+        domain=['|',('instructor_id', '=', True),
+                    ('category_id.name', 'ilike', "Teacher")])
+    course_id = fields.Many2one('openacademy.course', string='Course',
+        required=True) 
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
-    taken_seats = fields.Float(string="Taken seats", compute='_taken_seats')
+    taken_seats = fields.Float(compute='_compute_taken_seats')
     active = fields.Boolean(default=True)
-    end_date = fields.Date(string="End Date", store=True,
-        compute='_get_end_date', inverse='_set_end_date')
+    end_date = fields.Date(store=True, compute='_compute_get_end_date',
+        inverse='_inverse_set_end_date')
     hours = fields.Float(string="Duration in hours",
-                         compute='_get_hours', inverse='_set_hours')
-    attendees_count = fields.Integer(
-        string="Attendees count", compute='_get_attendees_count', store=True)
+                         compute='_compute_get_hours',
+                         inverse='_inverse_set_hours')
+    attendees_count = fields.Integer(compute='_compute_get_attendees_count',
+        store=True)
     color = fields.Integer()
     state = fields.Selection([
         ('draft', "Draft"),
@@ -42,12 +51,12 @@ class Session(models.Model):
         self.state = 'done'
 
     @api.depends('attendee_ids')
-    def _get_attendees_count(self):
+    def _compute_get_attendees_count(self):
         for r in self:
             r.attendees_count = len(r.attendee_ids)
 
     @api.depends('seats', 'attendee_ids')
-    def _taken_seats(self):
+    def _compute_taken_seats(self):
         for r in self:
             if not r.seats:
                 r.taken_seats = 0.0
@@ -78,7 +87,7 @@ class Session(models.Model):
                 raise exceptions.ValidationError("A session's instructor can't be an attendee")
 
     @api.depends('start_date', 'duration')
-    def _get_end_date(self):
+    def _compute_get_end_date(self):
         for r in self:
             if not (r.start_date and r.duration):
                 r.end_date = r.start_date
@@ -90,7 +99,7 @@ class Session(models.Model):
             duration = timedelta(days=r.duration, seconds=-1)
             r.end_date = start + duration
 
-    def _set_end_date(self):
+    def _inverse_set_end_date(self):
         for r in self:
             if not (r.start_date and r.end_date):
                 continue
@@ -102,10 +111,10 @@ class Session(models.Model):
             r.duration = (end_date - start_date).days + 1
 
     @api.depends('duration')
-    def _get_hours(self):
+    def _compute_get_hours(self):
         for r in self:
             r.hours = r.duration * 24
 
-    def _set_hours(self):
+    def _inverse_set_hours(self):
         for r in self:
             r.duration = r.hours / 24

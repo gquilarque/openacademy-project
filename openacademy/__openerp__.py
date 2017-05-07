@@ -1,28 +1,23 @@
 # -*- coding: utf-8 -*-
+############################################################################
+#    Module Writen For Odoo, Open Source Management Solution
+#
+#    coded by: Gabriela Quilarque <gabrielaquilarque97@gmail.com>
+############################################################################
 {
     'name': "Open Academy",
-
+    "license": "LGPL-3",
     'summary': """Manage trainings""",
-
-    'description': """
-        Open Academy module for managing trainings:
-            - training courses
-            - training sessions
-            - attendees registration
-    """,
-
-    'author': "GABRIELA",
-    'website': "http://www.vauxoogabriela.com",
-
+    'author': "Gabriela Quilarque",
+    'website': "",
     # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
+    # Check https://github.com/odoo/odoo/blob/master/openerp
+    # /addons/base/module/module_data.xml
     # for the full list
     'category': 'Test',
-    'version': '0.1',
-
+    'version': '8.0.3.3.0',
     # any module necessary for this one to work correctly
     'depends': ['base'],
-
     # always loaded
     'data': [
         'security/security.xml',
@@ -32,11 +27,11 @@
         'workflow/openacademy_session_workflow.xml',
         'security/ir.model.access.csv',
         'view/openacademy_wizard_view.xml',
-        #'templates.xml',
+        # 'templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/openacademy_course_demo.xml',
     ],
-    'installable':True,
+    'installable': True,
 }
