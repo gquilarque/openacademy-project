@@ -18,7 +18,7 @@ class Course(models.Model):
     name = fields.Char(string='Title', required=True)
     description = fields.Text()
     user_id = fields.Many2one('res.users', ondelete='cascade',
-            string='User Responsible')
+                              string='User Responsible')
     session_ids = fields.One2many('openacademy.session', 'course_id',
             string="Sessions G")
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
