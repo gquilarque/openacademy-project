@@ -13,7 +13,7 @@ class GlobalTestOpenAcademySession(TransactionCase):
     # Pseudo-constructor methods
     def setUp(self):
         # Define Global Variable to tests methods
-        super(GlobalTestOpenAcademySession,self).setUp()
+        super(GlobalTestOpenAcademySession, self).setUp()
         self.session = self.env['openacademy.session']
         self.partner_vauxoo = self.env.ref('base.res_partner_23')
         self.course_id = self.env.ref('openacademy.course3')
@@ -27,14 +27,12 @@ class GlobalTestOpenAcademySession(TransactionCase):
         Check raise: "A session's instructor can't be an attendee"
         '''
         with self.assertRaisesRegexp(
-            ValidationError,
-            "A session's instructor can't be an attendee"
-            ):
+            ValidationError, "A session's instructor can't be an attendee"):
             self.session.create({
                 'name': 'Session Test 1',
                 'seats': 1,
                 'user_id': self.partner_vauxoo.id,
-                'attendee_ids': [(6,0,[self.partner_vauxoo.id])], 
+                'attendee_ids': [(6, 0, [self.partner_vauxoo.id])],
                 'course_id': self.course_id.id
                 })
 
@@ -46,19 +44,18 @@ class GlobalTestOpenAcademySession(TransactionCase):
             'name': 'Session Test 2',
             'seats': 2,
             'user_id': self.partner_vauxoo.id,
-            'attendee_ids': [(6,0,[self.partner_attende.id])], 
+            'attendee_ids': [(6, 0, [self.partner_attende.id])],
             'course_id': self.course_id.id
             })
         # Check Initial State
-        self.assertEqual(session_test.state,'draft','Initial state should '
-            'be in draft')
+        self.assertEqual(session_test.state, 'draft', 'Initial state should '
+                        'be in draft')
         # Check next state an check it
         session_test.signal_workflow('button_confirm')
-        self.assertEqual(session_test.state,'confirmed',"Signal Confirm "
-            "don't work")
+        self.assertEqual(session_test.state, 'confirmed', "Signal Confirm "
+                        "don't work")
         # Check next state an check it
         session_test.signal_workflow('button_done')
-        self.assertEqual(session_test.state,'done',"Signal Done "
-            "don't work")
-        # self.env.cr.commit() Only for test data generated for test. 
+        self.assertEqual(session_test.state, 'done', "Signal Done don't work")
+        # self.env.cr.commit() Only for test data generated for test.
         # Please don't use
