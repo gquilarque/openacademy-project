@@ -6,7 +6,8 @@
 ############################################################################
 
 from datetime import timedelta
-from openerp import api,exceptions,fields,models
+from openerp import api, exceptions, fields, models
+
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -15,22 +16,22 @@ class Session(models.Model):
     start_date = fields.Date(default=fields.Date.today)
     duration = fields.Float(digits=(6, 2), help="Duration in days")
     seats = fields.Integer(string="Number of seats")
-    user_id = fields.Many2one('res.partner',
-        string='Instructor',
-        domain=['|',('instructor_id', '=', True),
-                    ('category_id.name', 'ilike', "Teacher")])
+    user_id = fields.Many2one(
+        'res.partner', string='Instructor',
+        domain=['|', ('instructor_id', '=', True),
+                ('category_id.name', 'ilike', "Teacher")])
     course_id = fields.Many2one('openacademy.course', string='Course',
-        required=True) 
+                                required=True)
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
     taken_seats = fields.Float(compute='_compute_taken_seats')
     active = fields.Boolean(default=True)
     end_date = fields.Date(store=True, compute='_compute_get_end_date',
-        inverse='_inverse_set_end_date')
+                           inverse='_inverse_set_end_date')
     hours = fields.Float(string="Duration in hours",
                          compute='_compute_get_hours',
                          inverse='_inverse_set_hours')
     attendees_count = fields.Integer(compute='_compute_get_attendees_count',
-        store=True)
+                                     store=True)
     color = fields.Integer()
     state = fields.Selection([
         ('draft', "Draft"),
@@ -69,7 +70,8 @@ class Session(models.Model):
             return {
                 'warning': {
                     'title': "Incorrect 'seats' value",
-                    'message': "The number of available seats may not be negative",
+                    'message': "The number of available seats "
+                    "may not be negative",
                 },
             }
         if self.seats < len(self.attendee_ids):
@@ -84,7 +86,8 @@ class Session(models.Model):
     def _check_instructor_not_in_attendees(self):
         for r in self:
             if r.user_id and r.user_id in r.attendee_ids:
-                raise exceptions.ValidationError("A session's instructor can't be an attendee")
+                raise exceptions.ValidationError(
+                    "A session's instructor can't be an attendee")
 
     @api.depends('start_date', 'duration')
     def _compute_get_end_date(self):
@@ -104,7 +107,7 @@ class Session(models.Model):
             if not (r.start_date and r.end_date):
                 continue
 
-            # Compute the difference between dates, but: Friday - Monday = 4 days,
+            # Compute the difference between dates, but:Friday-Monday=4 days,
             # so add one day to get 5 days instead
             start_date = fields.Datetime.from_string(r.start_date)
             end_date = fields.Datetime.from_string(r.end_date)

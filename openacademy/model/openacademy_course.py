@@ -5,24 +5,22 @@
 #    coded by: Gabriela Quilarque <gabrielaquilarque97@gmail.com>
 ############################################################################
 
-from datetime import timedelta
-from openerp import api,fields, models
+from openerp import api, fields, models
 
-'''
-This module is to create model of Course
-'''
 
 class Course(models.Model):
     '''
     This class create model of course
     '''
-
-    _name = "openacademy.course" # Model odoo name
-
-    name = fields.Char(string='Title', required=True)# Field reserved to identified the rec name
-    description = fields.Text() 
-    user_id = fields.Many2one('res.users', ondelete='cascade', string='User Responsible')
-    session_ids = fields.One2many('openacademy.session', 'course_id', string="Sessions G")
+    # Model odoo name
+    _name = "openacademy.course"
+    # Field reserved to identified the rec name
+    name = fields.Char(string='Title', required=True)
+    description = fields.Text()
+    user_id = fields.Many2one(
+        'res.users', ondelete='cascade', string='User Responsible')
+    session_ids = fields.One2many(
+        'openacademy.session', 'course_id', string="Sessions G")
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
 
     @api.multi
@@ -39,12 +37,10 @@ class Course(models.Model):
         default['name'] = new_name
         return super(Course, self).copy(default)
 
-
     _sql_constraints = [
         ('name_description_check',
          'CHECK(name != description)',
          "The title of the course should not be the description"),
-
         ('name_unique',
          'UNIQUE(name)',
          "The course title must be unique"),
