@@ -1,6 +1,6 @@
-[![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/${REPO_ID}/${BRANCH_NAME}.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-${REPO_NAME}-${REPO_ID})
-[![Build Status](https://travis-ci.org/OCA/${REPO_NAME}.svg?branch=${BRANCH_NAME})](https://travis-ci.org/OCA/${REPO_NAME})
-[![codecov](https://codecov.io/gh/OCA/${REPO_NAME}/branch/${BRANCH_NAME}/graph/badge.svg)](https://codecov.io/gh/OCA/${REPO_NAME})
+[![Build Status](https://travis-ci.org/gquilarque/openacademy-project.svg?branch=master)](https://travis-ci.org/gquilarque/openacademy-project)
+[![codecov](https://codecov.io/gh/gquilarque/openacademy-project/branch/master/graph/badge.svg)](https://codecov.io/gh/gquilarque/openacademy-project)
+[![Coverage Status](https://coveralls.io/repos/github/gquilarque/openacademy-project/badge.svg)](https://coveralls.io/github/gquilarque/openacademy-project)
 
 Open Academy Project
 ====================
@@ -20,8 +20,4 @@ Technical Course Content
 
     * Tools for Continuos Integration.
 
-    * Others. 
-
-[//]: # (addons)
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
-[//]: # (end addons)
+    * Others.
